@@ -7,7 +7,7 @@
         android:title="test1"
         app:showAsAction="ifRoom"/>
     <item android:id="@+id/action_settings"
-        android:title="ic_la"
+        android:title="***"
         app:showAsAction="ifRoom"/>
 
 </menu>
