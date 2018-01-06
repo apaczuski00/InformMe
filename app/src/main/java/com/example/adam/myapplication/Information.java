@@ -1,10 +1,5 @@
 package com.example.adam.myapplication;
 
-/**
- * Created by adam on 04.01.18.
- */
-
-
 public class Information {
     private String date;
     private String details;

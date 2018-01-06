@@ -9,9 +9,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-/**
- * Created by adam on 04.01.18.
- */
 
 public class InformationAdapter  extends ArrayAdapter<Information>{
     TextView informationDate ;
