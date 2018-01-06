@@ -1,4 +1,4 @@
-package com.example.adam.myapplication;
+package com.example.adam.myapplication.info;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,9 +7,11 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.adam.myapplication.R;
+
 import java.util.ArrayList;
 
-public class InformationActivity extends AppCompatActivity {
+public class InformationListActivity extends AppCompatActivity {
 
     private ListView informationListView;
     private ArrayAdapter<InformationRow> arrayAdapter;
@@ -36,7 +38,7 @@ public class InformationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.information_activity);
+        setContentView(R.layout.information_list_activity);
 
         informationListView = (ListView) findViewById(R.id.informationListView);
         arrayAdapter = new InformationAdapter(this,initInformationListView());

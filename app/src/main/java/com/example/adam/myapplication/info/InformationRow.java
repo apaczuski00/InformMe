@@ -1,4 +1,4 @@
-package com.example.adam.myapplication;
+package com.example.adam.myapplication.info;
 
 public class InformationRow {
     private String date;
