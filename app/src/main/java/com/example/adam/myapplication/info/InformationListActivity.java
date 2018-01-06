@@ -1,5 +1,6 @@
 package com.example.adam.myapplication.info;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -8,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.adam.myapplication.R;
+import com.example.adam.myapplication.create.CreateInformationActivity;
 
 import java.util.ArrayList;
 
@@ -27,8 +29,10 @@ public class InformationListActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.item_menu_add_information:
+                Intent intent = new Intent(getApplicationContext(), CreateInformationActivity.class);
+                startActivity(intent);
                 return true;
-            case R.id.item_menu_settings:
+            case R.id.item_menu_information_list:
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
