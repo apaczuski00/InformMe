@@ -1,12 +1,12 @@
 package com.example.adam.myapplication;
 
-public class Information {
+public class InformationRow {
     private String date;
     private String details;
     private String area;
 
 
-    public Information(String date, String details, String area) {
+    public InformationRow(String date, String details, String area) {
         this.date = date;
         this.details = details;
         this.area = area;

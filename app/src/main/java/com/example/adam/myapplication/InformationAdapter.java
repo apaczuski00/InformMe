@@ -10,13 +10,13 @@ import android.widget.TextView;
 import java.util.List;
 
 
-public class InformationAdapter  extends ArrayAdapter<Information>{
+public class InformationAdapter  extends ArrayAdapter<InformationRow>{
     TextView informationDate ;
     TextView informationDetails ;
     TextView informationArea ;
 
-    public InformationAdapter(Context context, List<Information> informationList) {
-        super(context, 0, informationList);
+    public InformationAdapter(Context context, List<InformationRow> informationRowList) {
+        super(context, 0, informationRowList);
     }
 
     @Override
@@ -29,11 +29,11 @@ public class InformationAdapter  extends ArrayAdapter<Information>{
         informationDetails = (TextView) convertView.findViewById(R.id.inforamtionDetails);
         informationArea = (TextView) convertView.findViewById(R.id.informationArea);
 
-        Information information = getItem(position);
+        InformationRow informationRow = getItem(position);
 
-        informationDate.setText(information.getDate());
-        informationDetails.setText(information.getDetails());
-        informationArea.setText(information.getArea());
+        informationDate.setText(informationRow.getDate());
+        informationDetails.setText(informationRow.getDetails());
+        informationArea.setText(informationRow.getArea());
 
         return convertView;
     }
