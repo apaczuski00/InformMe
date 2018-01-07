@@ -15,10 +15,22 @@ import com.example.adam.myapplication.R;
 import com.example.adam.myapplication.create.CreateInformationActivity;
 
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.ByteArrayHttpMessageConverter;
+import org.springframework.http.converter.ResourceHttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.http.converter.xml.SourceHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.xml.transform.Source;
 
 public class InformationListActivity extends AppCompatActivity {
 
@@ -31,6 +43,21 @@ public class InformationListActivity extends AppCompatActivity {
         new HttpRequestTask().execute();
     }
 
+
+    public ByteArrayHttpMessageConverter byteArrayHttpMessageConverter() {
+        ByteArrayHttpMessageConverter arrayHttpMessageConverter = new ByteArrayHttpMessageConverter();
+        arrayHttpMessageConverter.setSupportedMediaTypes(getSupportedMediaTypes());
+        return arrayHttpMessageConverter;
+    }
+
+    private List<MediaType> getSupportedMediaTypes() {
+        List<MediaType> list = new ArrayList<MediaType>();
+        list.add(MediaType.IMAGE_JPEG);
+        list.add(MediaType.IMAGE_PNG);
+        list.add(MediaType.APPLICATION_OCTET_STREAM);
+        return list;
+    }
+
     private class HttpRequestTask extends AsyncTask<Void, Void, Greeting> {
         @Override
         protected Greeting doInBackground(Void... params) {
@@ -38,13 +65,25 @@ public class InformationListActivity extends AppCompatActivity {
 
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-
+                restTemplate.getMessageConverters().add(byteArrayHttpMessageConverter() );
+                restTemplate.getMessageConverters().add(new ByteArrayHttpMessageConverter());
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+                restTemplate.getMessageConverters().add(new ResourceHttpMessageConverter());
+                restTemplate.getMessageConverters().add(new SourceHttpMessageConverter<Source>());
                 final String url = "http://rest-service.guides.spring.io/greeting";
                 Greeting greeting = restTemplate.getForObject(url, Greeting.class);
 
+                HttpHeaders headers = new HttpHeaders();
+                headers.setAccept(Arrays.asList(MediaType.APPLICATION_OCTET_STREAM));
+                HttpEntity<String> entity = new HttpEntity<String>(headers);
 
-                final String url2 = "http://10.0.2.2:2990/image-resource";
-                byte[] bytes = restTemplate.getForObject(url2   , byte[].class);
+                ResponseEntity<Resource> response = restTemplate.exchange(
+                        "http://10.0.2.2:2990/files/adam.png",
+                        HttpMethod.GET, entity,Resource.class, "1");
+
+
+//                final String url2 = "http://10.0.2.2:2990/files/adam.png";
+//                ResponseEntity<Resource> result = restTemplate.getForObject(url2, ResponseEntity.class);
 
                 return greeting;
             } catch (Exception e) {
