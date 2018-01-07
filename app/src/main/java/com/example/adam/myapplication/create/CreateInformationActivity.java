@@ -15,12 +15,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.example.adam.myapplication.R;
-import com.example.adam.myapplication.info.InformationAdapter;
 import com.example.adam.myapplication.info.InformationListActivity;
 
 import java.io.File;
@@ -28,9 +26,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-/**
- * Created by adam on 06.01.18.
- */
 
 public class CreateInformationActivity extends AppCompatActivity {
 
@@ -79,31 +74,9 @@ public class CreateInformationActivity extends AppCompatActivity {
         btnCapturePicture = (Button) findViewById(R.id.btnCapturePicture);
         btnRecordVideo = (Button) findViewById(R.id.btnRecordVideo);
 
-        /**
-         * Capture image button click event
-         */
-        btnCapturePicture.setOnClickListener(new View.OnClickListener() {
+        btnCapturePicture.setOnClickListener(view->captureImage());
+        btnRecordVideo.setOnClickListener(view -> recordVideo());
 
-            @Override
-            public void onClick(View v) {
-                // capture picture
-                captureImage();
-            }
-        });
-
-        /**
-         * Record video button click event
-         */
-        btnRecordVideo.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // record video
-                recordVideo();
-            }
-        });
-
-        // Checking camera availability
         if (!isDeviceSupportCamera()) {
             Toast.makeText(getApplicationContext(),
                     "Sorry! Your device doesn't support camera",
@@ -113,9 +86,7 @@ public class CreateInformationActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Checking device has camera hardware or not
-     * */
+
     private boolean isDeviceSupportCamera() {
         if (getApplicationContext().getPackageManager().hasSystemFeature(
                 PackageManager.FEATURE_CAMERA)) {
