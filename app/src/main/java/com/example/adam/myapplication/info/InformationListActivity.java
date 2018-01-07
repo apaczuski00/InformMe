@@ -87,7 +87,7 @@ public class InformationListActivity extends AppCompatActivity {
 
                 return greeting;
             } catch (Exception e) {
-                Log.e("MainActivity", e.getMessage(), e);
+                Log.e("Data from server_ERROR", e.getMessage(), e);
             }
 
             return null;
