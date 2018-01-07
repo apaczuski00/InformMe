@@ -1,6 +1,9 @@
 package com.example.adam.myapplication.info;
 
+import android.widget.ImageView;
+
 public class InformationRow {
+    private ImageView imageView;
     private String date;
     private String details;
     private String area;
